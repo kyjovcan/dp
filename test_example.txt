@@ -1,0 +1,16 @@
+// Uvažujte funkciu fn(). Čo vypíše nasledujúci program?
+
+int fn( int aa, int bb )
+{
+    char vysledok = aa + bb;
+  
+    return vysledok;
+}
+
+
+int main()
+{
+    printf("%d", fn( 40, 50 ));
+
+    return 0;
+}
