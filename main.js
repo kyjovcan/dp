@@ -1,39 +1,39 @@
-var cx, cy;
 
 
-var fs = require("fs");
+var request = require('request');
+var fs = require('fs');
+var express = require('express');
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-fs.readFile("./mytext.txt", function(text){
-    var textByLine = text.split("\n")
+
+app.get('', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
+app.get('/client.js', function(req, res){
+    res.sendFile(__dirname + '/client.js');
+});
+app.get('/style.css', function(req, res){
+    res.sendFile(__dirname + '/style.css');
+});
+app.get('/default.css', function(req, res){
+    res.sendFile(__dirname + '/default.css');
+});
+app.get('/index.css', function(req, res){
+    res.sendFile(__dirname + '/index.css');
+});
+app.get('/kod1.png', function(req, res){
+    res.sendFile(__dirname + '/kod1.png');
 });
 
+server.listen(process.env.PORT || 2000);
+console.log("Server started on PORT 2000");
 
-
-
-
-
-
-
-
-
-
-
-
-/*
-function mm(e){
-    cx = e.clientX;
-    cy = e.clientY;
-    run();
-}
-
-window.onload = run;
-window.onmousemove = mm;
-
-$(function() {
-
-   $("#code-list li").hover(function() {
-      $( this ).toggleClass( "blur-dropshadow" );
-    });
+io.on('connection', function (socket) {
+  socket.on('mainInput', function (searchWordInput) {
+    
+    console.log("Connected");
+  });
 });
 
-*/

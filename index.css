@@ -1,0 +1,396 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-size: 20px;
+  font-family: Segoe UI;
+  background: #eee;
+}
+
+.pt-page .content {
+	/* font-size: 4.4em; */
+	/* line-height: 1; */
+	/* letter-spacing: 6px; */
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 400px;
+    width: 50%;
+    height: 100%;
+    text-align: left;
+    font-size: 20px;
+    /* word-spacing: -0.3em; */
+}
+
+.pt-page .task-content {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+script { display: none; }
+
+.content-main {
+    overflow: hidden; 
+    position: absolute;
+    left: 400px;
+    right: 400px;
+    min-width: 600px;
+    top: 0; 
+    bottom: 0; 
+    padding-top: 10px;
+}
+
+.content-main-top {
+    position: relative;
+    overflow: hidden;
+    height: 80px;
+ }
+
+.content-main-center {
+    position: relative;
+    overflow: hidden; 
+    height: calc(100% - 50px - 120px - 45px);
+    cursor: none;
+ }
+
+.content-main-bottom {
+    position: relative;
+    overflow: hidden;
+    height: calc(120px + 45px);
+
+ }
+
+.content-right {
+    overflow: hidden; 
+    position: absolute;
+    bottom: 110px;
+    width: 350px;
+    top: 80px;
+    right: 50px;
+    padding: 10px;
+    height: calc(100% - 100px);
+}
+
+.content-right-top { 
+    position: relative;
+    overflow: hidden;
+    height: calc(50% - 50px);
+    padding-bottom: 10px;
+}
+.content-right-bottom {
+    position: relative;
+    overflow: hidden;
+    bottom: 0.5px;
+    height: calc(50% - 55px);
+}
+
+/* http://jsfiddle.net/LinkinTED/V67Vs/ */
+.question { 
+    height: 100%;
+    padding: 20px 0; }
+
+.tab { 
+    min-width: 130px;
+    padding: 6px 20px 0px 10px;
+    height: 40px;
+    background: #efefef;
+    float: left;
+    cursor: pointer;
+}
+
+.tab:hover {
+    background: grey;
+}
+
+.tab-selected { 
+    background: #ccc;
+    border: 1px solid #ccc;
+}
+
+.tab-selected:hover {
+    background: #ccc !important;
+}
+
+.timer {
+    font-weight: bold;
+    font-size: 45px;
+    color: black;
+    border: #ccc 1px solid;
+    text-align: center;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 2px;
+}
+
+.timer-red {
+    color: red !important;
+}
+
+.timer-complete {
+    background: #ff0000;
+    color: black !important;
+    border: #a00 3px solid;
+    margin: 0px;
+}
+
+.editor-container {  
+    position:relative; 
+    width: 100%;
+    height: 100%;
+/*  top:0; left:0; bottom:0; right:0; */
+    overflow: hidden; }
+.editors {
+    position:absolute; top:0; bottom:0; width: 100%; border: 1px solid #ccc;
+}
+
+.editors-show-tabs { top: 40px; }
+/* .editor { position:absolute; top:0; left:0; bottom:0; right:0; } */
+
+.answer { 
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.answer > input[type=text] { 
+    position: absolute;
+    left: 0;
+    width: calc(100% - 160px);
+}
+
+.answer > input[type=button] {
+    position: absolute;
+    right: 0;
+}
+
+#zoomNotice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: grey;
+    color: white;
+    font-size: 40;
+}
+
+#zoomNotice kbd {
+    font-size: 20;
+}
+
+.center-absolute {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.center-horizontal {
+    display: table;
+    margin: 0 auto;
+}
+
+.pt-page {
+    background: white;
+    color: black;
+}
+
+.editor {
+    height: 100%;
+}
+
+.question-answer {
+    display: inline-block;
+    margin: 4px 0;
+    width: calc(100% - 160px);
+}
+
+input[type=text], select {
+    font-size: 20px;
+    outline: none;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=button] {
+    font-size: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding:13px 50px;
+    margin: 4px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=button]:hover {
+    background-color: #45a049;
+}
+
+input[type=button]:disabled {
+    background-color: #aaaaaa;
+    cursor: not-allowed;
+}
+
+
+/*
+    Radio button styles 
+    Source: https://www.w3schools.com/howto/howto_css_custom_checkbox.asp
+*/
+/* The container */
+.choice-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Hide the browser's default radio button */
+.choice-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+    margin-top: 3px;
+}
+
+/* On mouse-over, add a grey background color */
+.choice-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.choice-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.choice-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.choice-container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+
+/* one item */
+.choice-container:first-child:nth-last-child(1) {
+/* -or- .choice-container:only-child { */
+    width: 100%;
+}
+    
+/* two items */
+.choice-container:first-child:nth-last-child(2),
+.choice-container:first-child:nth-last-child(2) ~ .choice-container {
+    width: calc(100%/2);
+}
+
+/* three items */
+.choice-container:first-child:nth-last-child(3),
+.choice-container:first-child:nth-last-child(3) ~ .choice-container {
+    width: calc(100%/3);
+}
+
+/* four items */
+.choice-container:first-child:nth-last-child(4),
+.choice-container:first-child:nth-last-child(4) ~ .choice-container {
+    width: calc(100%/4);
+}
+
+/* five items */
+.choice-container:first-child:nth-last-child(5),
+.choice-container:first-child:nth-last-child(5) ~ .choice-container {
+    width: calc(100%/5);
+}
+
+/* five items */
+.choice-container:first-child:nth-last-child(6),
+.choice-container:first-child:nth-last-child(6) ~ .choice-container {
+    width: calc(100%/6);
+}
+
+
+/*  
+    Keyboard tags
+    Source: http://www.jimmyscode.com/css-styling-for-kbd-tags/
+*/
+kbd {
+    padding:0.1em 0.6em;
+    border:1px solid #ccc;
+    font-size:20px;
+    font-family:Arial,Helvetica,sans-serif;
+    background-color:#f7f7f7;
+    color:#333;
+    -moz-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    -webkit-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+    display:inline-block;
+    margin:0 0.1em;
+    text-shadow:0 1px 0 #fff;
+    line-height:1.4;
+    white-space:nowrap;
+}
+
+
+.progressbar-container {
+    width: calc(100% - 5px);
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    height: 5px;
+    z-index: 999999;
+}
+
+.progressbar-bit {
+    /* width: calc(100%/10 - 5px); */
+    height: 5px;
+    background: #dfefff;
+    float: left;
+    margin-right: 5px;
+}
+
+.progressbar-bit-complete {
+    background: #80bfff;
+}
