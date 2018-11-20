@@ -1,5 +1,3 @@
-
-
 var request = require('request');
 var fs = require('fs');
 var express = require('express');
@@ -9,22 +7,22 @@ var io = require('socket.io')(server);
 
 
 app.get('', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/client.js', function(req, res){
-    res.sendFile(__dirname + '/client.js');
+    res.sendFile(__dirname + '/client/client.js');
 });
 app.get('/style.css', function(req, res){
-    res.sendFile(__dirname + '/style.css');
+    res.sendFile(__dirname + '/client/style.css');
 });
 app.get('/default.css', function(req, res){
-    res.sendFile(__dirname + '/default.css');
+    res.sendFile(__dirname + '/client/default.css');
 });
 app.get('/index.css', function(req, res){
-    res.sendFile(__dirname + '/index.css');
+    res.sendFile(__dirname + '/client/index.css');
 });
 app.get('/kod1.png', function(req, res){
-    res.sendFile(__dirname + '/kod1.png');
+    res.sendFile(__dirname + '/client/kod1.png');
 });
 
 server.listen(process.env.PORT || 2000);

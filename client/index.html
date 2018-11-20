@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <link href="default.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+    
+</head>
+<body>
+    <!-- page content -->
+<div class="content-main">
+    <div class="content-main-top">
+        <div class="center-horizontal">
+            <div id="timer" class="timer">
+                01:30
+            </div>
+        </div>
+    </div>
+    <div class="content-main-center ">
+        
+        <!--<div class="pic">
+            <svg class="blur" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%">
+                <image class="image-blur" filter="url(#filter2) " xlink:href="./kod1.png"></image>
+                
+                <filter id="filter2">
+                    <feGaussianBlur stdDeviation="7" />
+                </filter>
+                
+                <mask id="mask1">
+                    <circle cx="-50%" cy="-50%" r="30" fill="white" filter="url(#filter2)" />
+                </mask>
+                <image class="image-blur" xlink:href="./kod1.png" mask="url(#mask1)"></image> 
+            </svg>
+        </div>  -->
+        
+        <div class="pic">
+
+            <svg class="blur" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%">
+               
+               
+                <image  class="image-blur" filter="url(#blur-grayscale) " xlink:href="./kod1.png"></image>
+              
+                <filter id="blur-grayscale">
+                  <feColorMatrix in="SourceGraphic" type="saturate" values="5" result="A"></feColorMatrix>
+                  <feGaussianBlur in="A" stdDeviation="5" />
+                </filter>
+                
+                <mask id="mask1">
+                  <circle cx="-50%" cy="-50%" r="30" fill="white" filter="url(#blur-grayscale)" />
+                </mask>
+              
+             <image class="image-blur" xlink:href="./kod1.png"
+                    mask="url(#mask1)"></image>
+              
+            </svg>
+          
+          </div>
+
+
+    </div>
+    <div class="content-main-bottom">
+        <div class="question">
+            <span class="label-question">Čo vypíše program?</span>
+            <form class="answer-form"> 
+                <div class="answer">
+                    <input type="hidden" name="task" value="00-tutorial-kod2.c">
+                    <div class="question-answer">
+                        <label class="choice-container">
+                            <span class="label-question">60</span>
+                            <input type="radio" name="answer" value="60">
+                            <span class="checkmark"></span>
+                        </label><label class="choice-container">
+                            <span class="label-question">80</span>
+                            <input type="radio" name="answer" value="80">
+                            <span class="checkmark"></span>
+                        </label><label class="choice-container">
+                            <span class="label-question">140</span>
+                            <input type="radio" name="answer" value="140">
+                            <span class="checkmark"></span>
+                        </label><label class="choice-container">
+                            <span class="label-question">iné</span>
+                            <input type="radio" name="answer" value="iné">
+                            <span class="checkmark"></span>
+                        </label><label class="choice-container">
+                            <span class="label-question">neviem</span>
+                            <input type="radio" name="answer" value="neviem">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <input type="button" value="Ďalej" class="button button-next">
+                </div>
+            </form>
+        </div> 
+    </div>     
+</div>
+</body>
+</html>
