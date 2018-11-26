@@ -1,0 +1,56 @@
+FLOW
+
+- start servera                 ✓
+- pripojenie klienta            ✓
+- nacitanie stranky             ✓
+    - uvodna stranka
+        - ahoj vitaj na experimente 
+            vytvoria sa 
+        - tlacitko ZACAT experiment
+            - presmeruje na hlavnu stranku
+            - zacne nahravanie pohybov mysi
+                - pohyby mysi
+                    - agregovat data 
+                    - rozoznavat fixacie a sakady (!!!!!) 
+                        - post experiment - https://vega.github.io/datalib/ 
+                        - zbierat data do suboru   
+                            - JSON - x, y, dlzka fixacie
+    - rozbitie na komponenty
+        - main-top - timer, cislo ulohy
+        - main-center 
+            - nacitanie obrazku z kodu
+            - blur obrazku         - html riesenie
+            - filter na obrazok    - html r.
+            - maska na obrazok     - html r.
+        - main-bottom 
+            - otazka 
+            - odpovede 
+                - pre kazdy priklad osobitne 
+                - nacitanie zo suboru - asi json? 
+                - nemoznost ist dalej, kym nie je zvolena odpoved
+                - nacitat odpoved *do premennej* / do suboru? 
+                - vyhodnocovat hned/ *na konci* ?  
+                    - odpovede na serveri v subore, aby ich FE nevedel citat
+            - tlacitko DALEJ
+                - po kliku prepnut na dalsi SLIDE
+
+
+
+*** SERVER *** 
+- subor s otazkami - JSON
+    - nazov obrazku
+    - odpovede  
+        - zoznam (5) odpovedi
+- subor so spravnymi odpovedami 
+    - otazka
+    - odpoved
+
+*** CLIENT *** 
+- subor s odpovedami studenta- JSON ??? 
+    - cislo otazky
+    - odpoved 
+    - pohyby myši
+        - x
+        - y
+        - čas na danom mieste 
+ 

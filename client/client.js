@@ -37,8 +37,8 @@ window.onload = function (){
 
 	
 	let display = document.querySelector('#timer');
-	startTimer(90, display);
-  }; 
+	startTimer(32, display);
+}; 
 
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
@@ -50,14 +50,15 @@ function startTimer(duration, display) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
         display.textContent = minutes + ":" + seconds;
-
+		
         if (--timer < 30) {
 			
-			document.getElementById("#timer").className('timer-red');
+			$("#timer").addClass('timer-red');
 			console.log("cervena");
-		};
+		}
 		if (timer < 1){
-			document.getElementById("#timer").innerHTML = "KONIEC";
+			display.textContent = "KONIEC";
+			console.log("koniec");
 		}
     }, 1000);
 }

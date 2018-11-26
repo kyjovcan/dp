@@ -12,6 +12,9 @@ app.get('', function(req, res) {
 app.get('/client.js', function(req, res){
     res.sendFile(__dirname + '/client/client.js');
 });
+app.get('/jquery-3.3.1.min.js', function(req, res){
+    res.sendFile(__dirname + '/client/jquery-3.3.1.min.js');
+});
 app.get('/style.css', function(req, res){
     res.sendFile(__dirname + '/client/style.css');
 });
