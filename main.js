@@ -27,6 +27,15 @@ app.get('/index.css', function(req, res){
 app.get('/kod1.png', function(req, res){
     res.sendFile(__dirname + '/client/kod1.png');
 });
+app.get('/kod2.png', function(req, res){
+    res.sendFile(__dirname + '/client/kod2.png');
+});
+app.get('/kod3.png', function(req, res){
+    res.sendFile(__dirname + '/client/kod3.png');
+});
+app.get('/cake.jpg', function(req, res){
+    res.sendFile(__dirname + '/client/cake.jpg');
+});
 
 server.listen(process.env.PORT || 2000);
 console.log("Server started on PORT 2000");

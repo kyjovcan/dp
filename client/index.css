@@ -6,6 +6,11 @@ body {
   font-family: Segoe UI;
   background: #eee;
 }
+html { 
+    overflow-y: scroll; 
+    overflow-x:hidden; 
+}
+
 
 .pt-page .content {
 	/* font-size: 4.4em; */
@@ -31,9 +36,10 @@ script { display: none; }
 
 .content-main {
     overflow: hidden; 
-    position: absolute;
-    left: 400px;
-    right: 400px;
+    position: fixed;
+    max-width: 600px;
+    left: 50%;
+    margin-left: -300px;
     min-width: 600px;
     top: 0; 
     bottom: 0; 
@@ -143,7 +149,7 @@ script { display: none; }
     width: 100%;
     height: 100%;
 /*  top:0; left:0; bottom:0; right:0; */
-    overflow: hidden; }
+    overflow: hidden; } 
 .editors {
     position:absolute; top:0; bottom:0; width: 100%; border: 1px solid #ccc;
 }
@@ -351,49 +357,3 @@ input[type=button]:disabled {
     width: calc(100%/6);
 }
 
-
-/*  
-    Keyboard tags
-    Source: http://www.jimmyscode.com/css-styling-for-kbd-tags/
-*/
-kbd {
-    padding:0.1em 0.6em;
-    border:1px solid #ccc;
-    font-size:20px;
-    font-family:Arial,Helvetica,sans-serif;
-    background-color:#f7f7f7;
-    color:#333;
-    -moz-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
-    -webkit-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
-    box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    border-radius:3px;
-    display:inline-block;
-    margin:0 0.1em;
-    text-shadow:0 1px 0 #fff;
-    line-height:1.4;
-    white-space:nowrap;
-}
-
-
-.progressbar-container {
-    width: calc(100% - 5px);
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    height: 5px;
-    z-index: 999999;
-}
-
-.progressbar-bit {
-    /* width: calc(100%/10 - 5px); */
-    height: 5px;
-    background: #dfefff;
-    float: left;
-    margin-right: 5px;
-}
-
-.progressbar-bit-complete {
-    background: #80bfff;
-}
