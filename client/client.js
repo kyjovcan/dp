@@ -128,8 +128,15 @@ function showExperiment(){
 
     showSlide(0);
 
-    submitButton.addEventListener("click", showEndPage);
-    nextButton.addEventListener("click", showNextSlide);
+    submitButton.addEventListener("click", function(event){
+        event.preventDefault();
+        showEndPage();
+    });
+    nextButton.addEventListener("click", function(event){
+        event.preventDefault();
+        showNextSlide();
+    });
+    
 }
 
 function showEndPage(){
