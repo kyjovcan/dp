@@ -1,5 +1,5 @@
 var socket = io(); 
-
+let timeForQuestion = 90;
 const myQuestions = [
     {
         question: "Čo vypíše nasledujúci program?",
@@ -31,6 +31,427 @@ const myQuestions = [
             e: "neviem"
         }
     }
+    /* ,
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "4",
+            c: "7",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "3",
+            c: "6",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "100",
+            b: "110",
+            c: "111",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "3",
+            c: "4",
+            d: "5",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "3",
+            c: "4",
+            d: "5",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "3",
+            b: "4",
+            c: "7",
+            d: "11",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "3",
+            c: "4",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "3",
+            c: "4",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "3",
+            c: "4",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "8",
+            b: "9",
+            c: "18",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "8",
+            b: "9",
+            c: "18",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "8",
+            b: "9",
+            c: "18",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "4",
+            c: "8",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "20",
+            c: "200",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "10",
+            b: "20",
+            c: "30",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "0",
+            b: "1",
+            c: "2",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "0",
+            b: "1",
+            c: "2",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "20",
+            c: "200",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "6",
+            b: "9",
+            c: "12",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "6",
+            b: "9",
+            c: "12",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "6",
+            b: "9",
+            c: "12",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "9",
+            c: "18",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "9",
+            c: "18",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "9",
+            c: "18",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "1",
+            b: "2",
+            c: "3",
+            d: "4",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "3",
+            c: "4",
+            d: "5",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "2",
+            b: "3",
+            c: "4",
+            d: "5",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "0",
+            b: "-1",
+            c: "-2",
+            d: "3",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "-1",
+            b: "-2",
+            c: "-5",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "-3",
+            b: "-4",
+            c: "-5",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "Janka",
+            b: "JANKA",
+            c: "janka",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "BRATISLAVA",
+            b: "bratislava",
+            c: "Bratislava",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "ahoj, janka!",
+            b: "Ahoj, janka!",
+            c: "AHOJ, JANKA!",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "va",
+            b: "Eva",
+            c: "E",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "osice!",
+            b: "Kosice",
+            c: "K",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "atusukas",
+            b: "MatusLukas",
+            c: "M,L",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "1 2 3 4",
+            b: "1 2 3",
+            c: "1 2",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "4 2 1 4 4 5",
+            b: "2 1 2 5",
+            c: "2 5",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "4 2 3 9 6 12",
+            b: "4 2 3 6 8 12",
+            c: "2 3 9 6",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "1 3 2 5",
+            b: "2 1 3 5",
+            c: "1 2 3 5",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "1 3 2 4 5",
+            b: "1 2 3 4 5",
+            c: "3 1 2 4 5",
+            d: "iné",
+            e: "neviem"
+        }
+    },
+    {
+        question: "Čo vypíše nasledujúci program?",
+        answers: {
+            a: "5 4 1 6 7 13",
+            b: "1 4 5 6 7 13",
+            c: "4 1 5 6 7 13",
+            d: "iné",
+            e: "neviem"
+        }
+    }*/
   ];
 
 socket.on('connect', function () { 
@@ -47,23 +468,43 @@ function startExperiment(){
 }
 
 function buildQuestions() {
-    const output = [];
+    let output = [];
     let answers = [];
     myQuestions.forEach((currentQuestion, questionNumber) => {
         
-        for (let letter in currentQuestion.answers) {
-          answers.push(
-			 
-			`<label class="choice-container">
-				<span class="label-question">${currentQuestion.answers[letter]}</span>
-				<input type="radio" name="answer" value="${currentQuestion.answers[letter]}">
-				<span class="checkmark"></span>
-			</label>`
-          );
-        }
+        //for (let letter in currentQuestion.answers) {
+        answers.push(
+        `<div class="answer-slide">
+            <label class="choice-container">
+                <span class="label-question">${currentQuestion.answers['a']}</span>
+                <input type="radio" name="answer" value="${currentQuestion.answers['a']}">
+                <span class="checkmark"></span>
+            </label>
+            <label class="choice-container">
+                <span class="label-question">${currentQuestion.answers['b']}</span>
+                <input type="radio" name="answer" value="${currentQuestion.answers['b']}">
+                <span class="checkmark"></span>
+            </label>
+            <label class="choice-container">
+                <span class="label-question">${currentQuestion.answers['c']}</span>
+                <input type="radio" name="answer" value="${currentQuestion.answers['c']}">
+                <span class="checkmark"></span>
+            </label>
+            <label class="choice-container">
+                <span class="label-question">${currentQuestion.answers['d']}</span>
+                <input type="radio" name="answer" value="${currentQuestion.answers['d']}">
+                <span class="checkmark"></span>
+            </label>
+            <label class="choice-container">
+                <span class="label-question">${currentQuestion.answers['e']}</span>
+                <input type="radio" name="answer" value="${currentQuestion.answers['e']}">
+                <span class="checkmark"></span>
+            </label>
+        </div>`
+        );
+        //}
         output.push(
-			`
-			<div class="slide">
+			`<div class="slide">
 				<svg class="blur" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						
 				<image  class="image-blur" filter="url(#blur-grayscale) " xlink:href="./kod${questionNumber+1}.png"></image>
@@ -80,11 +521,10 @@ function buildQuestions() {
 				<image class="image-blur" xlink:href="./kod${questionNumber+1}.png"
 					mask="url(#mask1)"></image>
 				</svg>
-			</div>
-            `
+			</div>`
         );
     });
-    //document.getElementById("question-answer").innerHTML = answers.join("");
+    document.getElementById("question-answer").innerHTML = answers.join("");
     document.getElementById("code-pic").innerHTML = output.join("");
 }
 let currentSlide = 0;
@@ -93,6 +533,8 @@ function showExperiment(){
 	const submitButton = document.getElementById("submit");
     const nextButton = document.getElementById("next");
     const slides = document.querySelectorAll(".slide");
+    const answerSlides = document.querySelectorAll(".answer-slide");
+    
     let display = document.querySelector('#timer');
     let isLastPage = false;
     let timerInterval;
@@ -100,9 +542,12 @@ function showExperiment(){
     function showSlide(n) {
         slides[currentSlide].classList.remove("active-slide");
         slides[n].classList.add("active-slide");
+        answerSlides[currentSlide].classList.remove("active-slide");
+        answerSlides[n].classList.add("active-slide");
+        
         currentSlide = n;
 
-        startTimer(10, display);
+        startTimer(timeForQuestion, display);
 
         if (currentSlide === slides.length - 1) {
           nextButton.style.display = "none";

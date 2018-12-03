@@ -18,6 +18,7 @@
         <h2>Vitajte v experimente</h2>
         <p>Pre úspešné ukončenie musíte odpovedať na všetky otázky, ktoré preveria vaše programátorské schopnosti.<br>
             V každom príklade sa vám zobrazí jednoduchý zdrojový kód, pričom vašou úlohou je zistiť, čo tento kód vypíše.<br>
+            <br>Prosím, overte si, že nemáte priblíženú stránku, pre nápravu stlačte <em>Ctrl+0</em> .
             <br>Po úspešnom a svedomitom vypracovaní dostanete odmenu v podobe lahodného koláča. 
         </p>
         <button onclick="startExperiment()">Začať experiment</button>
@@ -27,7 +28,7 @@
         <div class="content-main-top">
             <div class="center-horizontal">
                 <div id="timer" class="timer">
-                    
+                    01:30
                 </div>
             </div>
         </div>
@@ -37,21 +38,14 @@
             </div>
         </div>
         <div class="content-main-bottom">
-            <div class="question">
-                <span class="label-question">Čo vypíše program?</span>
-                <form class="answer-form"> 
-                    <div class="answer">
-                        <input type="hidden">
-                        <div id="question-answer" class="question-answer">
-                            
-                        </div>
-                        <div class="buttons">
-                            <button id="next" class="button button-next">Ďalej</button>
-                            <button id="submit" class="button button-next">Koniec</button>       
-                        </div>
-                    </div>
-                </form>
-            </div> 
+            <span class="label-question">Čo vypíše program?</span>
+            <div class="answer">
+                <div id="question-answer" class="question-answer">
+                    
+                </div>
+                <button id="next" class="button button-next">Ďalej</button>
+                <button id="submit" class="button button-next">Koniec</button>
+            </div>
         </div>     
     </div>
     

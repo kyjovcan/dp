@@ -71,6 +71,17 @@ button#submit {
     opacity: 0;
     transition: opacity 0.5s;
 }
+.answer{
+    justify-content: flex-start;
+}
+.answer-slide{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
 .active-slide{
     opacity: 1;
     z-index: 2;
