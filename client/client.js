@@ -48,16 +48,11 @@ function startExperiment(){
 
 function buildQuestions() {
     const output = [];
-
+    let answers = [];
     myQuestions.forEach((currentQuestion, questionNumber) => {
-        let answers = [];
+        
         for (let letter in currentQuestion.answers) {
           answers.push(
-            /*`<label>
-               <input type="radio" name="question${questionNumber}" value="${letter}">
-                ${letter} :
-                ${currentQuestion.answers[letter]}
-			 </label>`*/
 			 
 			`<label class="choice-container">
 				<span class="label-question">${currentQuestion.answers[letter]}</span>
@@ -67,12 +62,6 @@ function buildQuestions() {
           );
         }
         output.push(
-            /*
-            `<div class="slide">
-                <div class="question"> ${currentQuestion.question} </div>
-                <div class="answers"> ${answers.join("")} </div>
-            </div>`
-            */
 			`
 			<div class="slide">
 				<svg class="blur" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -88,16 +77,15 @@ function buildQuestions() {
 					<circle cx="-50%" cy="-50%" r="30" fill="white" filter="url(#blur-grayscale)" />
 				</mask>
 				
-				<image class="image-blur" xlink:href="./kod1.png"
+				<image class="image-blur" xlink:href="./kod${questionNumber+1}.png"
 					mask="url(#mask1)"></image>
 				</svg>
 			</div>
             `
         );
     });
-    
+    //document.getElementById("question-answer").innerHTML = answers.join("");
     document.getElementById("code-pic").innerHTML = output.join("");
-    console.log(output);
 }
 let currentSlide = 0;
 function showExperiment(){
@@ -105,16 +93,21 @@ function showExperiment(){
 	const submitButton = document.getElementById("submit");
     const nextButton = document.getElementById("next");
     const slides = document.querySelectorAll(".slide");
-    
+    let display = document.querySelector('#timer');
+    let isLastPage = false;
+    let timerInterval;
 
     function showSlide(n) {
         slides[currentSlide].classList.remove("active-slide");
         slides[n].classList.add("active-slide");
         currentSlide = n;
-        console.log(slides.length);
+
+        startTimer(10, display);
+
         if (currentSlide === slides.length - 1) {
           nextButton.style.display = "none";
           submitButton.style.display = "inline-block";
+          isLastPage = true;
         } else {
           nextButton.style.display = "inline-block";
           submitButton.style.display = "none";
@@ -122,7 +115,6 @@ function showExperiment(){
     }
 
     function showNextSlide() {
-        console.log('next slide biatch');
         showSlide(currentSlide + 1);
     }
 
@@ -134,9 +126,35 @@ function showExperiment(){
     });
     nextButton.addEventListener("click", function(event){
         event.preventDefault();
+        clearInterval(timerInterval);
         showNextSlide();
     });
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        timerInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
     
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+    
+            display.textContent = minutes + ":" + seconds;
+            
+            if (--timer < 30) {
+                
+                $("#timer").addClass('timer-red');
+            }
+            if (timer < 1){
+                display.textContent = "KONIEC";
+                timer = duration;
+                if (!isLastPage)
+                    showNextSlide();
+                else 
+                    showEndPage();
+                clearInterval(timerInterval);
+            }
+        }, 1000);
+    }
 }
 
 function showEndPage(){
@@ -173,29 +191,4 @@ window.onload = function (){
 			}, 300);
 		}, 300);
 	});
-
-	
-	let display = document.querySelector('#timer');
-	startTimer(90, display);
 }; 
-
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds;
-		
-        if (--timer < 30) {
-			
-			$("#timer").addClass('timer-red');
-		}
-		if (timer < 1){
-			display.textContent = "KONIEC";
-		}
-    }, 1000);
-}
