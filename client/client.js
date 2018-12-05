@@ -463,6 +463,7 @@ function startExperiment(){
     console.log('experiment odstartovany');
     $(".start-page").hide();
     $(".content-main").show();
+    localStorage.removeItem("codeCount");
     buildQuestions();
     showExperiment();
 }
@@ -542,13 +543,13 @@ function showExperiment(){
     function showSlide(n) {
         //slides[currentSlide].classList.remove("active-slide");
         //slides[n].classList.add("active-slide");
-
-        document.getElementById(`slide${currentSlide+1}`).classList.add("active-slide");
+        codeCounter();
+        document.getElementById(`slide${currentSlide+1}`).classList.remove("active-slide");
         document.getElementById(`slide${n+1}`).classList.add("active-slide");
 
         answerSlides[currentSlide].classList.remove("active-slide");
         answerSlides[n].classList.add("active-slide");
-        console.log(n)
+        console.log('current slide cislo ' + currentSlide + ' n slide ' + n);
         currentSlide = n;
 
         startTimer(timeForQuestion, display);
@@ -609,6 +610,21 @@ function showExperiment(){
 function showEndPage(){
     $(".content-main").hide();
     $(".end-page").show();
+    localStorage.removeItem("codeCount");
+
+}
+
+function codeCounter() {
+    if(typeof(Storage) !== "undefined") {
+        if (localStorage.codeCount) {
+            localStorage.codeCount = Number(localStorage.codeCount)+1;
+        } else {
+            localStorage.codeCount = 1;
+        }
+        console.log('kod cislo ' + localStorage.codeCount);
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+    }
 }
 
 window.onload = function (){
@@ -617,9 +633,10 @@ window.onload = function (){
   
 	$('.pic').mousemove(function (event) {
 		event.preventDefault();
-		
-		var upX = (event.pageX - $('.slide').offset().left) + $('.slide').scrollLeft();
-        var upY = (event.pageY - $('.slide').offset().top) + $('.slide').scrollTop();
+        var actSlide = $(`#slide${localStorage.codeCount}`);
+        console.log(actSlide)
+		var upX = (event.pageX - actSlide.offset().left) + actSlide.scrollLeft();
+        var upY = (event.pageY - actSlide.offset().top) + actSlide.scrollTop();
         var mask = $('#mask1')[0];
         console.log(upX + ' ' + upY);
 		
