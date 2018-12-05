@@ -1,10 +1,12 @@
 var socket = io(); 
 let timeForQuestion = 90;
-let codeActions = [];
-let actCode = {};
+let codeActions = [];           // ***** NAJDOLEZITEJSIA PREMENNA S VYZBIERANYMI DATAMI *****
+let actCode = {};                       
 let moves = [];
 let currentSlide = 0;
 
+// zoznam odpovedi na vsetkych 45 otazok
+// aktualne zakomentovany, okrem prvych troch, pretoze mam 3 png kody 
 const myQuestions = [
     {
         question: "Čo vypíše nasledujúci program?",
@@ -459,11 +461,13 @@ const myQuestions = [
     }*/
   ];
 
+// pripojenie na server
 socket.on('connect', function () { 
     let data = 'connected'
     socket.emit('mainInput', data);
 });
 
+// inicializacia experimentu
 function startExperiment(){
     console.log('***** EXPERIMENT ODSTARTOVANY *****');
     $(".start-page").hide();
@@ -473,42 +477,43 @@ function startExperiment(){
     showExperiment();
 }
 
+// inicializacia otazok a odpovedi
 function buildQuestions() {
     let output = [];
     let answers = [];
+
+    // prejdenie vsetkych odpovedi, pre kazdu odpoved vytvorenie 
+    // zoznamu odpovedi (answers) a zahmleneho kodu (output)
     myQuestions.forEach((currentQuestion, questionNumber) => {
-        
-        //for (let letter in currentQuestion.answers) {
         answers.push(
         `<div id="answer-slide${questionNumber+1}" class="answer-slide">
             <label class="choice-container">
                 <span class="label-question">${currentQuestion.answers['a']}</span>
-                <input type="radio" name="answer" value="${currentQuestion.answers['a']}">
+                <input type="radio" name="answer" value="a">
                 <span class="checkmark"></span>
             </label>
             <label class="choice-container">
                 <span class="label-question">${currentQuestion.answers['b']}</span>
-                <input type="radio" name="answer" value="${currentQuestion.answers['b']}">
+                <input type="radio" name="answer" value="b">
                 <span class="checkmark"></span>
             </label>
             <label class="choice-container">
                 <span class="label-question">${currentQuestion.answers['c']}</span>
-                <input type="radio" name="answer" value="${currentQuestion.answers['c']}">
+                <input type="radio" name="answer" value="c">
                 <span class="checkmark"></span>
             </label>
             <label class="choice-container">
                 <span class="label-question">${currentQuestion.answers['d']}</span>
-                <input type="radio" name="answer" value="${currentQuestion.answers['d']}">
+                <input type="radio" name="answer" value="d">
                 <span class="checkmark"></span>
             </label>
             <label class="choice-container">
                 <span class="label-question">${currentQuestion.answers['e']}</span>
-                <input type="radio" name="answer" value="${currentQuestion.answers['e']}">
+                <input type="radio" name="answer" value="e">
                 <span class="checkmark"></span>
             </label>
         </div>`
         );
-        //}
         output.push(
 			`<div id="slide${questionNumber+1}" class="slide">
 				<svg class="blur" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -530,12 +535,14 @@ function buildQuestions() {
 			</div>`
         );
     });
+
+    // vypis elementov na obrazovku
     document.getElementById("question-answer").innerHTML = answers.join("");
     document.getElementById("code-pic").innerHTML = output.join("");
 }
 
+// funkcia pre postupne zobrazovanie kodov a odpovedi
 function showExperiment(){
-
 	const submitButton = document.getElementById("submit");
     const nextButton = document.getElementById("next");
     const slides = document.querySelectorAll(".slide");
@@ -545,17 +552,23 @@ function showExperiment(){
     let isLastPage = false;
     let timerInterval;
 
+    // funkcia pre zobrazenie jedneho slajdu s kodom a odpovedami 
     function showSlide(n) {
-        codeCounter();
+        codeCounter();  // inkrementacia aktualneho poradia kodu v localStorage
+        
+        // zobrazenie elementu s kodom
         document.getElementById(`slide${currentSlide+1}`).classList.remove("active-slide");
         document.getElementById(`slide${n+1}`).classList.add("active-slide");
 
+        // zobrazenie elementu s odpovedami
         answerSlides[currentSlide].classList.remove("active-slide");
         answerSlides[n].classList.add("active-slide");
         currentSlide = n;
 
+        // zobrazenie casovaca pre kazdy slajd
         startTimer(timeForQuestion, display);
 
+        // zobrazenie tlacidiel 'Dalej' a 'Koniec'
         if (currentSlide === slides.length - 1) {
           nextButton.style.display = "none";
           submitButton.style.display = "inline-block";
@@ -566,27 +579,35 @@ function showExperiment(){
         }
     }
 
+    // funkcia pre zobrazenie dalsieho slajdu
     function showNextSlide() {
         showSlide(currentSlide + 1);
     }
 
+    // pociatocne zobrazenie PRVEHO slajdu s kodom
     showSlide(0);
-    let answersDiv = document.getElementById(`answer-slide${localStorage.codeCount}`);
-    answersDiv.addEventListener("click", function(event){
-        event.preventDefault();
-        console.log(answersDiv);
+
+    // ziskanie pouzivatelom vybranej odpovede ( format 'a'/'b'/.../'n\a' )
+    $('input[name="answer"]').change((event)=>{
+        var selectedAnswer = $("input:checked").attr('value')
+        actCode.selectedAnswer = selectedAnswer;
     });
+
+    // event listener na preklik na poslednu stranku
     submitButton.addEventListener("click", function(event){
         event.preventDefault();
         showEndPage();
     });
+
+    // event listener na preklik na dalsi slajd
     nextButton.addEventListener("click", function(event){
         event.preventDefault();
-        clearInterval(timerInterval);
-        console.log(event.timestamp);
-        writeActualCode(event);
+        clearInterval(timerInterval);           // obnovenie casovaca
+        writeActualCode(event);                 // zapis do premennej so vsetkymi informaciami
         showNextSlide();
     });
+
+    // funkcia zobrazujuca casovac, taktiez posuva dalsi slajd ak vyprsi cas
     function startTimer(duration, display) {
         var timer = duration, minutes, seconds;
         timerInterval = setInterval(function () {
@@ -599,7 +620,6 @@ function showExperiment(){
             display.textContent = minutes + ":" + seconds;
             
             if (--timer < 30) {
-                
                 $("#timer").addClass('timer-red');
             }
             if (timer < 1){
@@ -615,33 +635,30 @@ function showExperiment(){
     }
 }
 
+// funkcia na zobrazenie poslednej stranky
 function showEndPage(){
     $(".content-main").hide();
     $(".end-page").show();
-    localStorage.removeItem("codeCount");
+    localStorage.removeItem("codeCount");       // reset pocitadla v localStorage             
+    
     console.log('XXXXX EXPERIMENT UKONCENY XXXXX');
 }
 
+// funkcia na pridanie vsetkych potrebnych dat do objektu 
 function writeActualCode(event) {
-    
     actCode.codeNumber = localStorage.codeCount;
-    actCode.selectedAnswer = getAnswer();
-    
+    actCode.selectedAnswer = actCode.selectedAnswer != null ? actCode.selectedAnswer : 'n/a';
     actCode.timestamp = event.timeStamp;
-    actCode.moves = moves;
+    actCode.moves = moves;                      // vsetky pohyby mysi - { timestamp, x, y }
 
     codeActions.push(actCode);
     //console.log(codeActions);
     actCode = {};
+    actCode.selectedAnswer = null;
     moves = [];
 }
 
-function getAnswer(){
-    const answersDiv = document.getElementById(`answer-slide${localStorage.codeCount}`);
-    console.log(answersDiv);
-    return 'b';
-}
-
+// pocitadlo aktualneho kodu v localStorage
 function codeCounter() {
     if(typeof(Storage) !== "undefined") {
         if (localStorage.codeCount) {
@@ -654,8 +671,8 @@ function codeCounter() {
     }
 }
 
+// onload funkcia zbierajuca pohyby mysi a ich timestampy
 window.onload = function (){
-
 	var svgNS = "http://www.w3.org/2000/svg";
     var startTime = null;
     
@@ -668,8 +685,10 @@ window.onload = function (){
 		var upX = (event.pageX - actSlide.offset().left) + actSlide.scrollLeft();
         var upY = (event.pageY - actSlide.offset().top) + actSlide.scrollTop();
         
+        // pridanie info o pohybe do pola pohybov, ktore sa neskor prida do codeActions
         moves.push({"timestamp" : startTime, "mouseX" : upX, "mouseY" : upY});
 
+        // maska cez blur filter podla pohybov mysi
         var mask = $('#mask1')[0];
 		var circle = document.createElementNS(svgNS,"circle");
 		circle.setAttribute("cx", upX);
@@ -689,5 +708,4 @@ window.onload = function (){
 			}, 300);
 		}, 300);
     });
-    
 }; 
