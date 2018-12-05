@@ -504,10 +504,10 @@ function buildQuestions() {
         );
         //}
         output.push(
-			`<div class="slide">
+			`<div id="slide${questionNumber+1}" class="slide">
 				<svg class="blur" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						
-				<image  class="image-blur" filter="url(#blur-grayscale) " xlink:href="./kod${questionNumber+1}.png"></image>
+				<image  class="image-blur" filter="url(#blur-grayscale) " xlink:href="./kod${questionNumber+1}.jpg"></image>
 				
 				<filter id="blur-grayscale">
 					<feColorMatrix in="SourceGraphic" type="saturate" values="5" result="A"></feColorMatrix>
@@ -518,7 +518,7 @@ function buildQuestions() {
 					<circle cx="-50%" cy="-50%" r="30" fill="white" filter="url(#blur-grayscale)" />
 				</mask>
 				
-				<image class="image-blur" xlink:href="./kod${questionNumber+1}.png"
+				<image class="image-blur" xlink:href="./kod${questionNumber+1}.jpg"
 					mask="url(#mask1)"></image>
 				</svg>
 			</div>`
@@ -540,11 +540,15 @@ function showExperiment(){
     let timerInterval;
 
     function showSlide(n) {
-        slides[currentSlide].classList.remove("active-slide");
-        slides[n].classList.add("active-slide");
+        //slides[currentSlide].classList.remove("active-slide");
+        //slides[n].classList.add("active-slide");
+
+        document.getElementById(`slide${currentSlide+1}`).classList.add("active-slide");
+        document.getElementById(`slide${n+1}`).classList.add("active-slide");
+
         answerSlides[currentSlide].classList.remove("active-slide");
         answerSlides[n].classList.add("active-slide");
-        
+        console.log(n)
         currentSlide = n;
 
         startTimer(timeForQuestion, display);
@@ -614,9 +618,10 @@ window.onload = function (){
 	$('.pic').mousemove(function (event) {
 		event.preventDefault();
 		
-		var upX = (event.pageX - $('.blur').offset().left);
-		var upY = (event.pageY - $('.blur').offset().top) ;
-		var mask = $('#mask1')[0];
+		var upX = (event.pageX - $('.slide').offset().left) + $('.slide').scrollLeft();
+        var upY = (event.pageY - $('.slide').offset().top) + $('.slide').scrollTop();
+        var mask = $('#mask1')[0];
+        console.log(upX + ' ' + upY);
 		
 		var circle = document.createElementNS(svgNS,"circle");
 		circle.setAttribute("cx", upX);

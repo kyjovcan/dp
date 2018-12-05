@@ -24,14 +24,14 @@ app.get('/default.css', function(req, res){
 app.get('/index.css', function(req, res){
     res.sendFile(__dirname + '/client/index.css');
 });
-app.get('/kod1.png', function(req, res){
-    res.sendFile(__dirname + '/client/kod1.png');
+app.get('/kod1.jpg', function(req, res){
+    res.sendFile(__dirname + '/client/imgs/kod1.jpg');
 });
-app.get('/kod2.png', function(req, res){
-    res.sendFile(__dirname + '/client/kod2.png');
+app.get('/kod2.jpg', function(req, res){
+    res.sendFile(__dirname + '/client/imgs/kod2.jpg');
 });
-app.get('/kod3.png', function(req, res){
-    res.sendFile(__dirname + '/client/kod3.png');
+app.get('/kod3.jpg', function(req, res){
+    res.sendFile(__dirname + '/client/imgs/kod3.jpg');
 });
 app.get('/cake.jpg', function(req, res){
     res.sendFile(__dirname + '/client/cake.jpg');

@@ -85,12 +85,9 @@ button#submit {
 .active-slide{
     opacity: 1;
     z-index: 2;
-  }
-  .quiz-container{
+}
+.quiz-container{
     position: relative;
     height: 200px;
     margin-top: 40px;
-  }
-.image-blur {
-    overflow: scroll;
 }
