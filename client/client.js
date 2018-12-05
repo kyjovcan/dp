@@ -1,5 +1,10 @@
 var socket = io(); 
 let timeForQuestion = 90;
+let codeActions = [];
+let actCode = {};
+let moves = [];
+let currentSlide = 0;
+
 const myQuestions = [
     {
         question: "Čo vypíše nasledujúci program?",
@@ -475,7 +480,7 @@ function buildQuestions() {
         
         //for (let letter in currentQuestion.answers) {
         answers.push(
-        `<div class="answer-slide">
+        `<div id="answer-slide${questionNumber+1}" class="answer-slide">
             <label class="choice-container">
                 <span class="label-question">${currentQuestion.answers['a']}</span>
                 <input type="radio" name="answer" value="${currentQuestion.answers['a']}">
@@ -529,7 +534,6 @@ function buildQuestions() {
     document.getElementById("code-pic").innerHTML = output.join("");
 }
 
-let currentSlide = 0;
 function showExperiment(){
 
 	const submitButton = document.getElementById("submit");
@@ -567,7 +571,11 @@ function showExperiment(){
     }
 
     showSlide(0);
-
+    let answersDiv = document.getElementById(`answer-slide${localStorage.codeCount}`);
+    answersDiv.addEventListener("click", function(event){
+        event.preventDefault();
+        console.log(answersDiv);
+    });
     submitButton.addEventListener("click", function(event){
         event.preventDefault();
         showEndPage();
@@ -575,6 +583,8 @@ function showExperiment(){
     nextButton.addEventListener("click", function(event){
         event.preventDefault();
         clearInterval(timerInterval);
+        console.log(event.timestamp);
+        writeActualCode(event);
         showNextSlide();
     });
     function startTimer(duration, display) {
@@ -609,6 +619,27 @@ function showEndPage(){
     $(".content-main").hide();
     $(".end-page").show();
     localStorage.removeItem("codeCount");
+    console.log('XXXXX EXPERIMENT UKONCENY XXXXX');
+}
+
+function writeActualCode(event) {
+    
+    actCode.codeNumber = localStorage.codeCount;
+    actCode.selectedAnswer = getAnswer();
+    
+    actCode.timestamp = event.timeStamp;
+    actCode.moves = moves;
+
+    codeActions.push(actCode);
+    //console.log(codeActions);
+    actCode = {};
+    moves = [];
+}
+
+function getAnswer(){
+    const answersDiv = document.getElementById(`answer-slide${localStorage.codeCount}`);
+    console.log(answersDiv);
+    return 'b';
 }
 
 function codeCounter() {
@@ -626,14 +657,19 @@ function codeCounter() {
 window.onload = function (){
 
 	var svgNS = "http://www.w3.org/2000/svg";
-  
+    var startTime = null;
+    
 	$('.pic').mousemove(function (event) {
         event.preventDefault();
+
+        startTime = event.timeStamp;
         
         var actSlide = $(`#slide${localStorage.codeCount}`);
 		var upX = (event.pageX - actSlide.offset().left) + actSlide.scrollLeft();
         var upY = (event.pageY - actSlide.offset().top) + actSlide.scrollTop();
         
+        moves.push({"timestamp" : startTime, "mouseX" : upX, "mouseY" : upY});
+
         var mask = $('#mask1')[0];
 		var circle = document.createElementNS(svgNS,"circle");
 		circle.setAttribute("cx", upX);
@@ -652,5 +688,6 @@ window.onload = function (){
 				mask.removeChild(circle);
 			}, 300);
 		}, 300);
-	});
+    });
+    
 }; 
