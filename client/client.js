@@ -460,7 +460,7 @@ socket.on('connect', function () {
 });
 
 function startExperiment(){
-    console.log('experiment odstartovany');
+    console.log('***** EXPERIMENT ODSTARTOVANY *****');
     $(".start-page").hide();
     $(".content-main").show();
     localStorage.removeItem("codeCount");
@@ -528,6 +528,7 @@ function buildQuestions() {
     document.getElementById("question-answer").innerHTML = answers.join("");
     document.getElementById("code-pic").innerHTML = output.join("");
 }
+
 let currentSlide = 0;
 function showExperiment(){
 
@@ -541,15 +542,12 @@ function showExperiment(){
     let timerInterval;
 
     function showSlide(n) {
-        //slides[currentSlide].classList.remove("active-slide");
-        //slides[n].classList.add("active-slide");
         codeCounter();
         document.getElementById(`slide${currentSlide+1}`).classList.remove("active-slide");
         document.getElementById(`slide${n+1}`).classList.add("active-slide");
 
         answerSlides[currentSlide].classList.remove("active-slide");
         answerSlides[n].classList.add("active-slide");
-        console.log('current slide cislo ' + currentSlide + ' n slide ' + n);
         currentSlide = n;
 
         startTimer(timeForQuestion, display);
@@ -611,7 +609,6 @@ function showEndPage(){
     $(".content-main").hide();
     $(".end-page").show();
     localStorage.removeItem("codeCount");
-
 }
 
 function codeCounter() {
@@ -621,7 +618,6 @@ function codeCounter() {
         } else {
             localStorage.codeCount = 1;
         }
-        console.log('kod cislo ' + localStorage.codeCount);
     } else {
         document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
     }
@@ -632,14 +628,13 @@ window.onload = function (){
 	var svgNS = "http://www.w3.org/2000/svg";
   
 	$('.pic').mousemove(function (event) {
-		event.preventDefault();
+        event.preventDefault();
+        
         var actSlide = $(`#slide${localStorage.codeCount}`);
-        console.log(actSlide)
 		var upX = (event.pageX - actSlide.offset().left) + actSlide.scrollLeft();
         var upY = (event.pageY - actSlide.offset().top) + actSlide.scrollTop();
+        
         var mask = $('#mask1')[0];
-        console.log(upX + ' ' + upY);
-		
 		var circle = document.createElementNS(svgNS,"circle");
 		circle.setAttribute("cx", upX);
 		circle.setAttribute("cy", upY);
